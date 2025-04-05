@@ -4,10 +4,21 @@ on:
   issues:
     types: [opened]
 
+permissions:
+  contents: read
+
 jobs:
   issue_triage:
+    permissions:
+      contents: read  # for github/issue-labeler to get repo contents
+      issues: write  # for github/issue-labeler to create or remove labels
     runs-on: ubuntu-latest
     steps:
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+      with:
+        egress-policy: audit
+
     - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
     - uses: github/issue-labeler@e24a3eb6b2e28c8904d086302a2b760647f5f45c # v3.1
       with:
