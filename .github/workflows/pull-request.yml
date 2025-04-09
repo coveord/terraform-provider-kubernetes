@@ -2,10 +2,21 @@ name: "Pull Request Triage"
 
 on: [pull_request_target]
 
+permissions:
+  contents: read
+
 jobs:
   triage:
+    permissions:
+      contents: read  # for actions/labeler to determine modified files
+      pull-requests: write  # for actions/labeler to add labels to PRs
     runs-on: ubuntu-latest
     steps:
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+      with:
+        egress-policy: audit
+
     - uses: actions/labeler@9fcb2c2f5584144ca754f8bfe8c6f81e77753375 # v4.1.0
       with:
         configuration-path: .github/labeler-pull-request-triage.yml

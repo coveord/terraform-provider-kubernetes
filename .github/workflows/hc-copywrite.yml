@@ -15,6 +15,11 @@ jobs:
   copywrite:
     runs-on: ubuntu-latest
     steps:
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+      with:
+        egress-policy: audit
+
     - name: Checkout repository
       uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
 

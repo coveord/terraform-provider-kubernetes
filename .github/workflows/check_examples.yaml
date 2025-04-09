@@ -18,6 +18,9 @@ on:
 env:
   KUBECONFIG: ${{ github.workspace }}/.kube/config
 
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -33,6 +36,11 @@ jobs:
       TF_X_KUBERNETES_MANIFEST_RESOURCE: 1
       TERM: linux
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+        with:
+          egress-policy: audit
+
       - uses: hashicorp/setup-terraform@633666f66e0061ca3b725c73b2ec20cd13a8fdd1 # v2.0.3
         with:
           terraform_version: ${{ matrix.terraform_version }}
