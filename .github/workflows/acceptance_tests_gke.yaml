@@ -59,7 +59,7 @@ jobs:
         with:
           go-version-file: 'go.mod'
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@35b0e87d162680511bf346c299f71c9c5c379033 # v1.1.1
+        uses: step-security/google-github-auth@40f6deebd366f16c782d7a0ad0844e3b96a032a6 # v2.1.10
         with:
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
           access_token_lifetime: "10800s"
@@ -136,7 +136,7 @@ jobs:
         with:
           go-version-file: 'go.mod'
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@35b0e87d162680511bf346c299f71c9c5c379033 # v1.1.1
+        uses: step-security/google-github-auth@40f6deebd366f16c782d7a0ad0844e3b96a032a6 # v2.1.10
         with:
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
           access_token_lifetime: "10800s"
@@ -187,7 +187,7 @@ jobs:
           path: |
             ${{ github.workspace }}/kubernetes/test-infra/gke
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@35b0e87d162680511bf346c299f71c9c5c379033 # v1.1.1
+        uses: step-security/google-github-auth@40f6deebd366f16c782d7a0ad0844e3b96a032a6 # v2.1.10
         with:
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
           access_token_lifetime: "10800s"
